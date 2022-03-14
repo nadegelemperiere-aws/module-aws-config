@@ -23,7 +23,6 @@ Library         ../keywords/data.py
 ${KEEPASS_DATABASE}                 ${vault_database}
 ${KEEPASS_KEY}                      ${vault_key}
 ${KEEPASS_GOD_KEY_ENTRY}            /engineering-environment/aws/aws-god-access-key
-${KEEPASS_GOD_USER_ENTRY}           /engineering-environment/aws/aws-god-credentials
 ${KEEPASS_ACCOUNT_ENTRY}            /engineering-environment/aws/aws-account
 ${REGION}                           eu-west-1
 
@@ -32,7 +31,6 @@ Prepare environment
     [Documentation]         Retrieve god credential from database and initialize python tests keywords
     ${god_access}           Load Keepass Database Secret            ${KEEPASS_DATABASE}     ${KEEPASS_KEY}  ${KEEPASS_GOD_KEY_ENTRY}            username
     ${god_secret}           Load Keepass Database Secret            ${KEEPASS_DATABASE}     ${KEEPASS_KEY}  ${KEEPASS_GOD_KEY_ENTRY}            password
-    ${god_name}             Load Keepass Database Secret            ${KEEPASS_DATABASE}     ${KEEPASS_KEY}  ${KEEPASS_GOD_USER_ENTRY}           username
     ${ACCOUNT}              Load Keepass Database Secret            ${KEEPASS_DATABASE}     ${KEEPASS_KEY}  ${KEEPASS_ACCOUNT_ENTRY}            password
     Initialize Terraform    ${REGION}   ${god_access}   ${god_secret}
     Initialize Config       None        ${god_access}   ${god_secret}    ${REGION}
