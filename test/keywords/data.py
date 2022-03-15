@@ -1,8 +1,8 @@
 # -------------------------------------------------------
-# TECHNOGIX 
+# TECHNOGIX
 # -------------------------------------------------------
 # Copyright (c) [2021] Technogix.io
-# All rights reserved 
+# All rights reserved
 # -------------------------------------------------------
 # Keywords to create data for module test
 # -------------------------------------------------------
@@ -24,7 +24,7 @@ from ipaddress import IPv4Network
 
 @keyword('Load Standard Test Data')
 def load_standard_test_data(bucket, loggroup, config, account, region) :
-    
+
     result = {}
     result['config'] = []
 
