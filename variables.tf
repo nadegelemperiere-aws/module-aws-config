@@ -1,8 +1,8 @@
 # -------------------------------------------------------
-# TECHNOGIX 
+# TECHNOGIX
 # -------------------------------------------------------
 # Copyright (c) [2021] Technogix.io
-# All rights reserved 
+# All rights reserved
 # -------------------------------------------------------
 # Module to deploy an aws configuration recorder with all
 # the secure components required
@@ -10,6 +10,10 @@
 # Nadège LEMPERIERE, @12 november 2021
 # Latest revision: 12 november 2021
 # -------------------------------------------------------
+
+terraform {
+	experiments = [ module_variable_optional_attrs ]
+}
 
 # -------------------------------------------------------
 # Contact e-mail for this deployment
@@ -60,4 +64,24 @@ variable "cloudwatch" {
 	type = object({
 		role	= string
 	})
+}
+
+# -------------------------------------------------------
+# Config rules
+# -------------------------------------------------------
+variable "rules" {
+	type = list(object({
+		name			= string,
+		source 			= object({
+			owner = string,
+			source_identifier = string
+		}),
+		input			= optional(string),
+		scope			= object({
+			compliance_resource_id 		= optional(string)
+			compliance_resource_types   = optional(list(string))
+			tag_key   					= optional(string)
+			tag_value   				= optional(string)
+		})
+	}))
 }

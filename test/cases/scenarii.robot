@@ -25,7 +25,7 @@ ${KEEPASS_DATABASE}                 ${vault_database}
 ${KEEPASS_KEY_ENV}                  ${vault_key_env}
 ${KEEPASS_PRINCIPAL_KEY_ENTRY}      /engineering-environment/aws/aws-principal-access-key
 ${KEEPASS_ACCOUNT_ENTRY}            /engineering-environment/aws/aws-account
-${REGION}                           eu-west-1
+${REGION}                           us-east-1
 
 *** Test Cases ***
 Prepare environment
@@ -45,5 +45,6 @@ Create Config
     ${states}   Load Terraform States           ${CURDIR}/../data/standard
     ${specs}    Load Standard Test Data         ${states['test']['outputs']['bucket']['value']}    ${states['test']['outputs']['loggroup']['value']}   ${states['test']['outputs']['config']['value']}  ${ACCOUNT}     ${REGION}
     Recorders Shall Exist And Match             ${specs['config']}
+    Rules Shall Exist And Match                 ${specs['rule']}
     Empty S3 Bucket                             ${states['test']['outputs']['bucket']['value']['name']}
     [Teardown]  Destroy Terraform Deployment    ${CURDIR}/../data/standard

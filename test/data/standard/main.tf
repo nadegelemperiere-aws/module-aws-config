@@ -107,6 +107,16 @@ module "config" {
 	cloudwatch			=  {
 		role 	= aws_iam_role.group.arn
 	}
+	rules = [{
+		name = "eip_attached"
+		source = {
+			owner = "AWS"
+			source_identifier = "EIP_ATTACHED"
+		}
+		scope = {
+			compliance_resource_types = [ "AWS::EC2::EIP" ]
+		}
+	}]
 }
 
 # -------------------------------------------------------

@@ -35,3 +35,44 @@ resource "aws_config_delivery_channel" "topic_env_sso_config_logging" {
 	s3_key_prefix		= var.bucket.prefix
 	depends_on			= [aws_config_configuration_recorder.config]
 }
+
+# -------------------------------------------------------
+# Configure Config Rules
+# -------------------------------------------------------
+resource "aws_config_config_rule" "rules" {
+
+	count = length(var.rules)
+
+	name 	= "${var.project}_${var.rules[count.index].name}"
+	source {
+    	owner             = lookup(var.rules[count.index].source,"owner",null)
+    	source_identifier = lookup(var.rules[count.index].source,"source_identifier",null)
+  	}
+
+	input_parameters = lookup(var.rules[count.index],"input",null)
+
+	dynamic scope {
+
+		for_each = (("${var.rules[count.index].scope}" != null) ? ["1"] : [])
+		content {
+			compliance_resource_id 		= lookup(var.rules[count.index].scope,"compliance_resource_id",null)
+			compliance_resource_types 	= lookup(var.rules[count.index].scope,"compliance_resource_types",null)
+			tag_key 					= lookup(var.rules[count.index].scope,"tag_key",null)
+			tag_value 					= lookup(var.rules[count.index].scope,"tag_value",null)
+		}
+	}
+
+  	depends_on = [
+		aws_config_configuration_recorder.config,
+		aws_config_delivery_channel.topic_env_sso_config_logging
+	]
+
+  	tags = {
+		Name           	= "${var.project}.configrule.${var.rules[count.index].name}"
+		Environment     = var.environment
+		Owner   		= var.email
+		Project   		= var.project
+		Version 		= var.git_version
+		Module  		= var.module
+	}
+}

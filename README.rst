@@ -27,10 +27,10 @@ This project contains all the infrastructure as code (IaC) to deploy an AWS conf
 Built With
 ----------
 
-.. image:: https://img.shields.io/static/v1?label=terraform&message=1.1.7&color=informational
+.. image:: https://img.shields.io/static/v1?label=terraform&message=1.2.1&color=informational
    :target: https://www.terraform.io/docs/index.html
    :alt: Terraform
-.. image:: https://img.shields.io/static/v1?label=terraform%20AWS%20provider&message=4.4.0&color=informational
+.. image:: https://img.shields.io/static/v1?label=terraform%20AWS%20provider&message=4.16.0&color=informational
    :target: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
    :alt: Terraform AWS provider
 
@@ -64,6 +64,22 @@ To use this module in a wider terraform deployment, add the module to a terrafor
         cloudwatch  = {
             role   = Role to use to get loggroup access
         }
+        rules = [
+           {
+		          name = Rule name
+		          source = {
+			           owner = Rule source owner
+			           source_identifier = identifier of the rule
+		          }
+                input = additional parameters for rule (optional)
+		          scope = {
+                    compliance_resource_id = id of the resources that trigger rule checking
+			           compliance_resource_types = [ list of the types of the resources that triggers rule checking (optional) ]
+                    tag_key = tag key of the resources that trigger rule checking
+                    tag_value = tag value of the resources that trigger rule checking
+		          }
+	       }
+        ]
     }
 
 Usage
@@ -90,16 +106,16 @@ Tested With
 -----------
 
 
-.. image:: https://img.shields.io/static/v1?label=technogix_iac_keywords&message=v1.0.0&color=informational
+.. image:: https://img.shields.io/static/v1?label=technogix_iac_keywords&message=v1.4.0&color=informational
    :target: https://github.com/technogix-terraform/robotframework
    :alt: Technogix iac keywords
-.. image:: https://img.shields.io/static/v1?label=python&message=3.10.2&color=informational
+.. image:: https://img.shields.io/static/v1?label=python&message=3.10.4&color=informational
    :target: https://www.python.org
    :alt: Python
-.. image:: https://img.shields.io/static/v1?label=robotframework&message=4.1.3&color=informational
+.. image:: https://img.shields.io/static/v1?label=robotframework&message=5.0.1&color=informational
    :target: http://robotframework.org/
    :alt: Robotframework
-.. image:: https://img.shields.io/static/v1?label=boto3&message=1.21.7&color=informational
+.. image:: https://img.shields.io/static/v1?label=boto3&message=1.24.1&color=informational
    :target: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
    :alt: Boto3
 
@@ -172,7 +188,7 @@ This code is under MIT License.
 Contact
 =======
 
-Nadege LEMPERIERE - nadege.lemperiere@technogix.io
+Technogix - contact.technogix@gmail.com
 
 Project Link: `https://github.com/technogix-terraform/module-aws-config`_
 
