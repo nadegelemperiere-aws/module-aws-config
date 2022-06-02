@@ -66,5 +66,6 @@ jobs:
               env:
                 VAULT_KEY: ${{ secrets.VAULT_KEY }}
               uses: docker://technogix/terraform-python-awscli:v2.1.0
+
               with:
                 args: ./module/scripts/robot.sh -l WARN -d tests -k VAULT_KEY
