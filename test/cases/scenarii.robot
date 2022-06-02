@@ -31,8 +31,8 @@ ${REGION}                           us-east-1
 Prepare environment
     [Documentation]         Retrieve principal credential from database and initialize python tests keywords
     ${vault_key}            Get Environment Variable          ${KEEPASS_KEY_ENV}
-    ${principal_access}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${vault_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}            username
-    ${principal_secret}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${vault_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}            password
+    ${principal_access}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${vault_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}      username
+    ${principal_secret}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${vault_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}      password
     ${ACCOUNT}              Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${vault_key}  ${KEEPASS_ACCOUNT_ENTRY}            password
     Initialize Terraform    ${REGION}   ${principal_access}   ${principal_secret}
     Initialize Config       None        ${principal_access}   ${principal_secret}    ${REGION}
