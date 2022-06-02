@@ -39,6 +39,19 @@ def load_standard_test_data(bucket, loggroup, config, account, region) :
     # result['config'][0]['data']['Status'] = True
     # status takes a while to switch to true
 
+    result['rule'] = []
+
+    result['rule'].append({})
+    result['rule'][0]['name'] = 'rule'
+    result['rule'][0]['data'] = {}
+
+    result['rule'][0]['data']['Source'] = {}
+    result['rule'][0]['data']['Source']['Owner'] = 'AWS'
+    result['rule'][0]['data']['Source']['SourceIdentifier'] = 'EIP_ATTACHED'
+    result['rule'][0]['data']['ConfigRuleState'] = 'ACTIVE'
+    result['rule'][0]['data']['Scope'] = {}
+    result['rule'][0]['data']['Scope']['ComplianceResourceTypes'] = ['AWS::EC2::EIP']
+
     logger.debug(dumps(result))
 
     return result
