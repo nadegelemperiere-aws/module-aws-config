@@ -1,7 +1,5 @@
 # -------------------------------------------------------
-# TECHNOGIX
-# -------------------------------------------------------
-# Copyright (c) [2021] Technogix.io
+# Copyright (c) [2021] Nadege Lemperiere
 # All rights reserved
 # -------------------------------------------------------
 # Module to deploy an aws configuration recorder with all
@@ -53,7 +51,7 @@ resource "aws_config_config_rule" "rules" {
 
 	dynamic scope {
 
-		for_each = (("${var.rules[count.index].scope}" != null) ? ["1"] : [])
+		for_each = ((var.rules[count.index].scope != null) ? ["1"] : [])
 		content {
 			compliance_resource_id 		= lookup(var.rules[count.index].scope,"compliance_resource_id",null)
 			compliance_resource_types 	= lookup(var.rules[count.index].scope,"compliance_resource_types",null)
