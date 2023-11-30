@@ -20,6 +20,11 @@ ignore:
         reason: Bucket is just for testing purpose and versions are not managed
         expires: 2030-03-11T00:00:00.000Z
         created: 2022-03-11T18:24:00.000Z
+  SNYK-CC-AWS-415:
+    - 'test/data/standard/main.tf > *':
+        reason: Loggroup is only there for test purpose, and therefore does not need to be encrypted
+        expires: 2030-03-11T00:00:00.000Z
+        created: 2022-03-13T15:12:00.000Z
   SNYK-CC-TF-134:
     - 'test/data/standard/main.tf > *':
         reason: Loggroup is only there for test purpose, and therefore does not need to get a retention period
