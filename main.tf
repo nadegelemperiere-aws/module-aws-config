@@ -51,7 +51,7 @@ resource "aws_config_config_rule" "rules" {
 
 	dynamic scope {
 
-		for_each = (("${var.rules[count.index].scope}" != null) ? ["1"] : [])
+		for_each = ((var.rules[count.index].scope != null) ? ["1"] : [])
 		content {
 			compliance_resource_id 		= lookup(var.rules[count.index].scope,"compliance_resource_id",null)
 			compliance_resource_types 	= lookup(var.rules[count.index].scope,"compliance_resource_types",null)
