@@ -1,50 +1,49 @@
 # -------------------------------------------------------
-# TECHNOGIX
-# -------------------------------------------------------
-# Copyright (c) [2021] Technogix.io
+# Copyright (c) [2021] Nadege Lemperiere
 # All rights reserved
 # -------------------------------------------------------
 # Module to deploy an aws configuration recorder with all
 # the secure components required
 # -------------------------------------------------------
 # Nadège LEMPERIERE, @12 november 2021
-# Latest revision: 12 november 2021
+# Latest revision: 30 november 2023
 # -------------------------------------------------------
-
-terraform {
-	experiments = [ module_variable_optional_attrs ]
-}
 
 # -------------------------------------------------------
 # Contact e-mail for this deployment
 # -------------------------------------------------------
 variable "email" {
-	type 	= string
+	type 	 = string
+	nullable = false
 }
 
 # -------------------------------------------------------
 # Environment for this deployment (prod, preprod, ...)
 # -------------------------------------------------------
 variable "environment" {
-	type 	= string
+	type 	 = string
+	nullable = false
 }
 
 # -------------------------------------------------------
 # Topic context for this deployment
 # -------------------------------------------------------
 variable "project" {
-	type    = string
+	type     = string
+	nullable = false
 }
 variable "module" {
-	type 	= string
+	type 	 = string
+	nullable = false
 }
 
 # -------------------------------------------------------
 # Solution version
 # -------------------------------------------------------
 variable "git_version" {
-	type    = string
-	default = "unmanaged"
+	type     = string
+	nullable = false
+	default  = "unmanaged"
 }
 
 #  -------------------------------------------------------
@@ -55,6 +54,7 @@ variable "bucket" {
 		name 	= string
 		prefix	= string
 	})
+	nullable = false
 }
 
 #  -------------------------------------------------------
@@ -64,6 +64,7 @@ variable "cloudwatch" {
 	type = object({
 		role	= string
 	})
+	nullable = false
 }
 
 # -------------------------------------------------------
@@ -84,4 +85,5 @@ variable "rules" {
 			tag_value   				= optional(string)
 		})
 	}))
+	nullable = false
 }
